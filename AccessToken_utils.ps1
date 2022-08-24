@@ -1631,6 +1631,7 @@ function Get-Cache
         foreach($key in $cacheKeys)
         {
             $accessToken=$script:tokens[$key]
+	    $refresh_token=$script:refresh_tokens[$key]
 
             if([string]::IsNullOrEmpty($accessToken))
             {
@@ -1649,6 +1650,8 @@ function Get-Cache
                 "HasRefreshToken" = $script:refresh_tokens.Contains($key)
                 "AuthMethods" =     $parsedToken.amr
                 "Device" =          $parsedToken.deviceid
+                "AccessToken" =     $accessToken
+                "RefreshToken" =    $refresh_token
             }
 
             New-Object psobject -Property $attributes
